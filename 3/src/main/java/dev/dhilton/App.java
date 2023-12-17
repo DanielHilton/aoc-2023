@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        File input = new File("input.txt");
+        File input = new File(args[0]);
         try (Scanner sc = new Scanner(input))
         {
             List<List<Character>> rawSchematic = new ArrayList<>();

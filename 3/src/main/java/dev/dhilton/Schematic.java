@@ -15,9 +15,10 @@ public class Schematic {
         int total = 0;
         for (int i = 0; i < raw.size(); i++) {
             List<Integer> partNos = this.ParsePartNumbersInLine(i);
-            int diff = partNos.stream().reduce(0, Integer::sum);
-            System.out.println("ADDING: " + diff);
-            total += diff;
+            for (int j = 0; j < partNos.size(); j++) {
+                total += partNos.get(j);
+            }
+
             System.out.println("TOTAL: " + total);
         }
 
@@ -95,6 +96,14 @@ public class Schematic {
                             isValidPartNumber = nextLine.get(i).toString().matches(SYMBOL_REGEX);
                         }
                     }
+                }
+
+                if (i == line.size() - 1 && isValidPartNumber) {
+                    System.out.println(currentPartNumber);
+                    result.add(Integer.parseInt(currentPartNumber));
+                    isValidPartNumber = false;
+                    currentPartNumber = "";
+                    foundInt = false;
                 }
             }
         }
